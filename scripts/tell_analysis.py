@@ -93,3 +93,17 @@ def user_aggregation(df_cleaned):
         total_Social_Media_UL_data=('Social Media UL (Bytes)', 'sum')
     ).reset_index()
     print(user_aggregation)
+    
+    
+def seg_user_into_deciles(df_cleaned):
+    # Create a new column for total data (DL + UL)
+    df_cleaned['Total Data (Bytes)'] = df_cleaned['Total DL (Bytes)'] + df_cleaned['Total UL (Bytes)']
+
+    # Calculate the decile classes based on the total session duration
+    df_cleaned['Decile Class'] = pd.qcut(df_cleaned['Dur. (ms)'], 10, labels=False)  # 0-9 labels
+
+    # Group by Decile Class to compute total data
+    decile_summary = df_cleaned.groupby('Decile Class')['Total Data (Bytes)'].sum().reset_index()
+
+    print("Total Data per Decile Class:")
+    print(decile_summary)
