@@ -78,3 +78,18 @@ def visualize_outlies(df):
 
     plt.tight_layout()  # Adjust layout to prevent overlap
     plt.show()  # Display the plots
+    
+    
+
+def user_aggregation(df_cleaned):
+    user_aggregation = df_cleaned.groupby(['IMSI', 'MSISDN/Number']).agg(
+        number_of_sessions=('Bearer Id', 'count'),
+        total_session_duration=('Dur. (ms)', 'sum'),
+        total_DL_data=('Total DL (Bytes)', 'sum'),
+        total_UL_data=('Total UL (Bytes)', 'sum'),
+        total_HTTP_DL_data=('HTTP DL (Bytes)', 'sum'),
+        total_HTTP_UL_data=('HTTP UL (Bytes)', 'sum'),
+        total_Social_Media_DL_data=('Social Media DL (Bytes)', 'sum'),
+        total_Social_Media_UL_data=('Social Media UL (Bytes)', 'sum')
+    ).reset_index()
+    print(user_aggregation)
