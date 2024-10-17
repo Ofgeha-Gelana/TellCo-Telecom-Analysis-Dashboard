@@ -9,6 +9,15 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.preprocessing import StandardScaler
 
+from sklearn.decomposition import PCA
+from sklearn.impute import SimpleImputer
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import psycopg2
+import numpy as np
+
 
 def find_missing_values(df):
     """
@@ -107,3 +116,6 @@ def seg_user_into_deciles(df_cleaned):
 
     print("Total Data per Decile Class:")
     print(decile_summary)
+
+
+
