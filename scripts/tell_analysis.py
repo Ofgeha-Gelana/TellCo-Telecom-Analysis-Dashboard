@@ -72,30 +72,72 @@ def replace_missing_values(data):
     return data
 
 
-# Define a function to identify outliers using the IQR method
-def identify_outliers_iqr(df):
-    outlier_indices = []
-    
-    for col in df.select_dtypes(include=['float64', 'int64']).columns:  # Only consider numerical columns
-        Q1 = df[col].quantile(0.25)
-        Q3 = df[col].quantile(0.75)
-        IQR = Q3 - Q1
-        
-        # Define the lower and upper bounds
-        lower_bound = Q1 - 1.5 * IQR
-        upper_bound = Q3 + 1.5 * IQR
-        
-        # Find outliers
-        outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
-        outlier_indices.extend(outliers.index.tolist())
-        
-        # Print summary
-        print(f'Column: {col}')
-        print(f'Outliers: {outliers[col].count()}')
-        print(f'Lower Bound: {lower_bound}, Upper Bound: {upper_bound}')
-        print('-' * 30)
+def convertByteIntoMegaByte(data):
+    # We Have to convert some the data into MB or TB or GB
+    megabyte=1*10e+5
+    data['Bearer Id']=data['Bearer Id']/megabyte
+    data['IMSI']=data['IMSI']/megabyte
+    data['MSISDN/Number']=data['MSISDN/Number']/megabyte
+    data['IMEI']=data['IMEI']/megabyte
+    for column in data.columns:
+        if 'Bytes' in column:
+            data[column]=data[column]/megabyte
+    return data
 
-    return outlier_indices
+
+# Define a function to identify outliers using the IQR method
+def get_outlier_summary(data):
+    """
+    Calculates outlier summary statistics for a DataFrame.
+
+    Args:
+        data : Input DataFrame.
+
+    Returns:
+        Outlier summary DataFrame.
+    """
+
+    outlier_summary = pd.DataFrame(columns=['Variable', 'Number of Outliers'])
+    data = data.select_dtypes(include='number')
+
+    for column_name in data.columns:
+        q1 = data[column_name].quantile(0.25)
+        q3 = data[column_name].quantile(0.75)
+        iqr = q3 - q1
+        lower_bound = q1 - 1.5 * iqr
+        upper_bound = q3 + 1.5 * iqr
+        outliers = data[(data[column_name] < lower_bound) | (data[column_name] > upper_bound)]
+
+        outlier_summary = pd.concat(
+            [outlier_summary, pd.DataFrame({'Variable': [column_name], 'Number of Outliers': [outliers.shape[0]]})],
+            ignore_index=True
+        )
+    non_zero_count = (outlier_summary['Number of Outliers'] > 0).sum()
+    print(f"From {data.shape[1]} selected numerical columns, there are {non_zero_count} columns with outlier values.")
+
+    return outlier_summary
+
+def remove_outliers(xdr_data):
+    """
+    Removes outliers from specified columns of a DataFrame using winsorization.
+
+    Args:
+        data: The input DataFrame.
+        column_names (list): A list of column names to process.
+
+    Returns:
+        The DataFrame with outliers removed.
+    """
+    # data = xdr_data.select_dtypes(include='number')
+    for column_name in xdr_data.select_dtypes(include='number').columns:
+        q1 = xdr_data[column_name].quantile(0.25)
+        q3 = xdr_data[column_name].quantile(0.75)
+        iqr = q3 - q1
+        lower_bound = q1 - 1.5 * iqr
+        upper_bound = q3 + 1.5 * iqr
+        xdr_data[column_name] = xdr_data[column_name].clip(lower_bound, upper_bound)
+
+    return xdr_data
 
 
 def visualize_outlies(df):
