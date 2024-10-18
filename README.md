@@ -33,7 +33,7 @@ The following tasks are performed:
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/Ofgeha-Gelana/TellCo-Telecom-Analysis-Dashboard.git
-    cd financial-sentiment-analysis
+    cd TellCo-Telecom-Analysis-Dashboard
     ```
 
 2. **Create a virtual environment and install dependencies:**
@@ -51,4 +51,3 @@ The following tasks are performed:
     jupyter notebook notebooks/
     ```
     - Explore and analyze the data.
-    - Perform sentiment analysis and correlation analysis.
