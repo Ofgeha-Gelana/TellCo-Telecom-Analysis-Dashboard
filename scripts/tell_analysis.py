@@ -19,7 +19,7 @@ import psycopg2
 import numpy as np
 
 
-def find_missing_values(df):
+def list_missing_values(df):
     """
     Finds missing values and returns a summary.
 

@@ -57,8 +57,8 @@ DB_PORT = os.getenv("DB_PORT_NUMBER")
 DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
-def get_dataFrame_from_database():
-    conn = connect_to_database(DB_NAME,DB_PORT,DB_USER,DB_PASSWORD,DB_HOST)
+def get_dataFrame_from_postgres():
+    conn = connect_to_database('tellcom',5432,'postgres','ofge','localhost')
     if conn is not None:
         query = "SELECT * FROM xdr_data"
         xdr_data = execute_query(conn, query)
