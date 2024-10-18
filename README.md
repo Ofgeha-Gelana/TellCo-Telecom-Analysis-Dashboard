@@ -25,3 +25,8 @@ The following tasks are performed:
 5. **Optimizing Number of Clusters (Elbow Method)**:
    - Determining the optimal number of clusters (k) using the elbow method.
 
+
+## Clone the repository:
+
+git clone https://github.com/yourusername/customer-engagement-analysis.git
+cd customer-engagement-analysis
