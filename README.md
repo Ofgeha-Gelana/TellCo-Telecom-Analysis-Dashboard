@@ -25,8 +25,30 @@ The following tasks are performed:
 5. **Optimizing Number of Clusters (Elbow Method)**:
    - Determining the optimal number of clusters (k) using the elbow method.
 
+## Project Structure
+├── data/ # Raw and processed data files ├── notebooks/ # Jupyter notebooks for data exploration and analysis ├── src/ # Source code for data preprocessing and analysis ├── reports/ # Final report and supporting documentation ├── requirements.txt # Python dependencies └── README.md # Project overview and instructions
 
-## Clone the repository:
 
- -- git clone https://github.com/yourusername/customer-engagement-analysis.git
-cd customer-engagement-analysis
+## Setup Instructions
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/Ofgeha-Gelana/TellCo-Telecom-Analysis-Dashboard.git
+    cd financial-sentiment-analysis
+    ```
+
+2. **Create a virtual environment and install dependencies:**
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    pip install -r requirements.txt
+    ```
+
+3. **Download and prepare the data:**
+    - Place raw data files in the `Data/` directory.
+
+4. **Run the Jupyter notebooks:**
+    ```bash
+    jupyter notebook notebooks/
+    ```
+    - Explore and analyze the data.
+    - Perform sentiment analysis and correlation analysis.
