@@ -25,12 +25,3 @@ The following tasks are performed:
 5. **Optimizing Number of Clusters (Elbow Method)**:
    - Determining the optimal number of clusters (k) using the elbow method.
 
-## Project Structure
-
-```bash
-|-- data/               # Directory containing your dataset
-|-- src/                # Source code directory
-|   |-- aggregation.py   # Script to aggregate metrics per customer
-|   |-- clustering.py    # Script to normalize data and perform K-means clustering
-|   |-- visualization.py # Script to plot application usage and elbow method
-|-- README.md           # This file
