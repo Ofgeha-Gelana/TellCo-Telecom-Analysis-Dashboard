@@ -28,5 +28,5 @@ The following tasks are performed:
 
 ## Clone the repository:
 
-git clone https://github.com/yourusername/customer-engagement-analysis.git
+ -- git clone https://github.com/yourusername/customer-engagement-analysis.git
 cd customer-engagement-analysis
