@@ -50,4 +50,3 @@ The following tasks are performed:
     ```bash
     jupyter notebook notebooks/
     ```
-    - Explore and analyze the data.
